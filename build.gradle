@@ -1,0 +1,77 @@
+plugins {
+	id 'java'
+	id 'maven-publish'
+	id 'org.springframework.boot' version '3.5.9'
+	id 'io.spring.dependency-management' version '1.1.7'
+	id 'org.springframework.cloud.contract' version '5.0.1'
+}
+
+group = 'com.algaworks.algashop'
+version = '0.0.1-SNAPSHOT'
+description = 'Product Catalog'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+publishing {
+	publications {
+		maven(MavenPublication) {
+			artifact bootJar
+			artifact verifierStubsJar
+		}
+	}
+}
+
+ext {
+	set('springCloudVersion', "2025.1.0")
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-verifier'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+/**
+ * Deixe o BOM do Spring Cloud controlar as versões do ecossistema Cloud/Contract,
+ * e o Spring Boot controlar o core Spring (spring-test, spring-webmvc, etc.).
+ */
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+contracts {
+	packageWithBaseClasses = "com.algaworks.algashop.product.catalog.contract.base"
+	// opcional: se seus contratos estiverem fora do default:
+	// contractsPath = file("src/test/resources/contracts")
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+tasks.named('contractTest') {
+	useJUnitPlatform()
+}

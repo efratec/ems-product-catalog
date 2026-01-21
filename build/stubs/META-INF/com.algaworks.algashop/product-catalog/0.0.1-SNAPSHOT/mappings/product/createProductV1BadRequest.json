@@ -1,0 +1,27 @@
+{
+  "id" : "4922327e-f734-4ddb-9346-3541cf3503f4",
+  "request" : {
+    "urlPath" : "/api/v1/products",
+    "method" : "POST",
+    "headers" : {
+      "Accept" : {
+        "matches" : "application/json.*"
+      },
+      "Content-Type" : {
+        "matches" : "application/json.*"
+      }
+    },
+    "bodyPatterns" : [ {
+      "matchesJsonPath" : "$[?(@.['name'] == '')]"
+    } ]
+  },
+  "response" : {
+    "status" : 400,
+    "body" : "{\"instance\":\"{{{request.path}}}\",\"type\":\"/errors/invalid-fields\",\"title\":\"Invalid fields\",\"detail\":\"One or more fields are invalid\"}",
+    "headers" : {
+      "Content-Type" : "application/problem+json"
+    },
+    "transformers" : [ "response-template", "spring-cloud-contract" ]
+  },
+  "uuid" : "4922327e-f734-4ddb-9346-3541cf3503f4"
+}

@@ -1,0 +1,39 @@
+{
+  "id" : "819c68bf-a2f0-46e8-b941-49ac085d53e2",
+  "request" : {
+    "urlPath" : "/api/v1/products",
+    "method" : "POST",
+    "headers" : {
+      "Accept" : {
+        "matches" : "application/json.*"
+      },
+      "Content-Type" : {
+        "matches" : "application/json.*"
+      }
+    },
+    "bodyPatterns" : [ {
+      "matchesJsonPath" : "$[?(@.['name'] =~ /^\\s*\\S[\\S\\s]*/)]"
+    }, {
+      "matchesJsonPath" : "$[?(@.['brand'] =~ /^\\s*\\S[\\S\\s]*/)]"
+    }, {
+      "matchesJsonPath" : "$[?(@.['regularPrice'] =~ /-?(\\d*\\.\\d+|\\d+)/)]"
+    }, {
+      "matchesJsonPath" : "$[?(@.['salePrice'] =~ /-?(\\d*\\.\\d+|\\d+)/)]"
+    }, {
+      "matchesJsonPath" : "$[?(@.['enabled'] =~ /(true|false)/)]"
+    }, {
+      "matchesJsonPath" : "$[?(@.['categoryId'] =~ /[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/)]"
+    }, {
+      "matchesJsonPath" : "$[?(@.['description'] =~ /(^\\s*\\S[\\S\\s]*)?/)]"
+    } ]
+  },
+  "response" : {
+    "status" : 201,
+    "body" : "{\"id\":\"cdb6eb46-9247-4ffe-b820-33a0b23c4409\",\"addedAt\":\"2014-04-14T12:23:34.123Z\",\"name\":\"{{{jsonPath request.body '$.name'}}}\",\"brand\":\"{{{jsonPath request.body 'brand'}}}\",\"regularPrice\":{{{jsonPath request.body '$.regularPrice'}}} ,\"salePrice\":{{{jsonPath request.body '$.salePrice'}}} ,\"inStock\":false,\"enabled\":{{{jsonPath request.body '$.enabled'}}} ,\"category\":{\"id\":\"{{{jsonPath request.body '$.categoryId'}}}\",\"name\":\"Notebook\"},\"description\":\"{{{jsonPath request.body '$.description'}}}\"}",
+    "headers" : {
+      "Content-Type" : "application/json"
+    },
+    "transformers" : [ "response-template", "spring-cloud-contract" ]
+  },
+  "uuid" : "819c68bf-a2f0-46e8-b941-49ac085d53e2"
+}
