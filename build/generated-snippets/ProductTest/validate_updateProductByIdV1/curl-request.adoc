@@ -1,0 +1,15 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/api/v1/products/a3927f81-5d33-4b0e-b2e4-3c1a7bba8d5f' -i -X PUT \
+    -H 'Content-Type: application/json' \
+    -H 'Accept: application/json' \
+    -d '{
+  "name" : "Notebook X11",
+  "brand" : "Deep Diver",
+  "regularPrice" : 1500.0,
+  "salePrice" : 1000.0,
+  "enabled" : false,
+  "categoryId" : "f5ab7a1e-37da-41e1-892b-a1d38275c2f2",
+  "description" : "A Gamer Notebook"
+}'
+----

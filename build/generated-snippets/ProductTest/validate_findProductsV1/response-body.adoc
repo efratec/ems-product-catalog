@@ -1,0 +1,4 @@
+[source,json,options="nowrap"]
+----
+{"number":0,"size":10,"totalPages":1,"totalElements":2,"content":[{"id":"895e3346-d2ba-43ab-8946-b086c2be4ad4","addedAt":"2026-01-21T19:53:31.82644388-03:00","name":"Notebook X11","brand":"Deep Diver","regularPrice":1500.00,"salePrice":1000.00,"inStock":true,"enabled":true,"category":{"id":"746eeb8b-a45d-4006-9962-c8891cf7ce87","name":"Notebook"},"description":"A Gamer Notebook"},{"id":"977ed34f-ad1b-42f5-9b09-e0b511f9597e","addedAt":"2026-01-21T19:53:31.826528983-03:00","name":"Desktop I9000","brand":"Deep Diver","regularPrice":3500.00,"salePrice":3000.00,"inStock":false,"enabled":true,"category":{"id":"5c1c7007-ad33-4583-80d2-fe703069526c","name":"Desktop"},"description":"A Gamer Desktop"}]}
+----

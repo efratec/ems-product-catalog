@@ -1,0 +1,8 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 404 Not Found
+Content-Type: application/problem+json
+Content-Length: 128
+
+{"type":"/errors/not-found","title":"Not found","status":404,"instance":"/api/v1/products/c7e42a19-8b54-4c92-9d2a-1f8ef83a37e6"}
+----

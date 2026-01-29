@@ -1,0 +1,18 @@
+[source,http,options="nowrap"]
+----
+PUT /api/v1/products/c7e42a19-8b54-4c92-9d2a-1f8ef83a37e6 HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Content-Length: 222
+Host: localhost:8080
+
+{
+  "name" : "Notebook X11",
+  "brand" : "Deep Diver",
+  "regularPrice" : 1500.0,
+  "salePrice" : 1000.0,
+  "enabled" : false,
+  "categoryId" : "f5ab7a1e-37da-41e1-892b-a1d38275c2f2",
+  "description" : "A Gamer Notebook"
+}
+----

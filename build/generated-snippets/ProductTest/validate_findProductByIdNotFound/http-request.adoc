@@ -1,0 +1,7 @@
+[source,http,options="nowrap"]
+----
+GET /api/v1/products/21651a12-b126-4213-ac21-19f66ff4642e HTTP/1.1
+Accept: application/json
+Host: localhost:8080
+
+----

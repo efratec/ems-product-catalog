@@ -1,0 +1,7 @@
+[source,http,options="nowrap"]
+----
+DELETE /api/v1/products/f1d3a7c4-6b2e-4f8a-9217-5d9c2e1b3a5f HTTP/1.1
+Accept: application/json
+Host: localhost:8080
+
+----

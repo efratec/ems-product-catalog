@@ -1,0 +1,12 @@
+[source,json,options="nowrap"]
+----
+{
+  "name" : "Notebook X11",
+  "brand" : "Deep Diver",
+  "regularPrice" : 1500.0,
+  "salePrice" : 1000.0,
+  "enabled" : false,
+  "categoryId" : "f5ab7a1e-37da-41e1-892b-a1d38275c2f2",
+  "description" : "A Gamer Notebook"
+}
+----

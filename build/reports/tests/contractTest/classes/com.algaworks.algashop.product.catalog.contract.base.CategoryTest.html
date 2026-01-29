@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">1.073s</div>
+<div class="counter">1.096s</div>
 <p>duration</p>
 </div>
 </td>
@@ -82,17 +82,17 @@
 </thead>
 <tr>
 <td class="success">validate_createCategoryBadRequestV1()</td>
-<td class="success">0.147s</td>
+<td class="success">0.161s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">validate_createCategoryV1()</td>
-<td class="success">0.019s</td>
+<td class="success">0.025s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">validate_deleteCategoryByIdNotFoundV1()</td>
-<td class="success">0.017s</td>
+<td class="success">0.011s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -102,12 +102,12 @@
 </tr>
 <tr>
 <td class="success">validate_findCategoriesV1()</td>
-<td class="success">0.030s</td>
+<td class="success">0.033s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">validate_findCategoryByIdNotFoundV1()</td>
-<td class="success">0.809s</td>
+<td class="success">0.816s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -122,7 +122,7 @@
 </tr>
 <tr>
 <td class="success">validate_updateCategoryV1()</td>
-<td class="success">0.013s</td>
+<td class="success">0.012s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -130,8 +130,8 @@
 <div class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre id="class-stdout">20:58:08.998 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.algaworks.algashop.product.catalog.contract.base.CategoryTest]: CategoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-20:58:09.168 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.algaworks.algashop.product.catalog.ProductCatalogApplication for test class com.algaworks.algashop.product.catalog.contract.base.CategoryTest
+<pre id="class-stdout">19:53:27.848 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.algaworks.algashop.product.catalog.contract.base.CategoryTest]: CategoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:53:27.986 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.algaworks.algashop.product.catalog.ProductCatalogApplication for test class com.algaworks.algashop.product.catalog.contract.base.CategoryTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -142,39 +142,39 @@
 
  :: Spring Boot ::                (v3.5.9)
 
-2026-01-20T20:58:09.549-03:00  INFO 29654 --- [product-catalog] [    Test worker] c.a.a.p.c.contract.base.CategoryTest     : Starting CategoryTest using Java 21.0.7 with PID 29654 (started by efraim in /home/efraim/Desenvolvimento/GIT/Especialista - Microserviços/Algaworks/algashop-meta/microservices/product-catalog)
-2026-01-20T20:58:09.550-03:00  INFO 29654 --- [product-catalog] [    Test worker] c.a.a.p.c.contract.base.CategoryTest     : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2026-01-20T20:58:11.569-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-01-20T20:58:11.570-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-01-20T20:58:11.575-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
-2026-01-20T20:58:11.604-03:00  INFO 29654 --- [product-catalog] [    Test worker] c.a.a.p.c.contract.base.CategoryTest     : Started CategoryTest in 2.361 seconds (process running for 3.448)
-2026-01-20T20:58:11.631-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-01-20T20:58:11.631-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-01-20T20:58:11.632-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
-2026-01-20T20:58:12.432-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-01-20T20:58:12.432-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-01-20T20:58:12.434-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-01-20T20:58:12.450-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-01-20T20:58:12.451-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-01-20T20:58:12.452-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-01-20T20:58:12.600-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-01-20T20:58:12.600-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-01-20T20:58:12.601-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
-2026-01-20T20:58:12.619-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-01-20T20:58:12.620-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-01-20T20:58:12.620-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
-2026-01-20T20:58:12.632-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-01-20T20:58:12.632-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-01-20T20:58:12.633-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-01-20T20:58:12.646-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-01-20T20:58:12.646-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-01-20T20:58:12.647-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-01-20T20:58:12.662-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-01-20T20:58:12.662-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-01-20T20:58:12.663-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-01-20T20:58:12.676-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-01-20T20:58:12.677-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-01-20T20:58:12.678-03:00  INFO 29654 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-01-21T19:53:28.315-03:00  INFO 423790 --- [product-catalog] [    Test worker] c.a.a.p.c.contract.base.CategoryTest     : Starting CategoryTest using Java 21.0.7 with PID 423790 (started by efraim in /home/efraim/Desenvolvimento/GIT/Especialista - Microserviços/Algaworks/algashop-meta/microservices/product-catalog)
+2026-01-21T19:53:28.316-03:00  INFO 423790 --- [product-catalog] [    Test worker] c.a.a.p.c.contract.base.CategoryTest     : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2026-01-21T19:53:30.108-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:30.109-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:30.111-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-01-21T19:53:30.135-03:00  INFO 423790 --- [product-catalog] [    Test worker] c.a.a.p.c.contract.base.CategoryTest     : Started CategoryTest in 2.102 seconds (process running for 3.043)
+2026-01-21T19:53:30.178-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:30.178-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:30.179-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-01-21T19:53:30.975-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:30.975-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:30.976-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-01-21T19:53:30.987-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:30.987-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:30.988-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-01-21T19:53:31.154-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:31.155-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:31.156-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-01-21T19:53:31.178-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:31.179-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:31.179-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-01-21T19:53:31.191-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:31.191-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:31.192-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-01-21T19:53:31.205-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:31.206-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:31.206-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-01-21T19:53:31.220-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:31.220-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:31.221-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-01-21T19:53:31.233-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:31.233-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:31.234-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
 </pre>
 <button class="clipboard-copy-btn" aria-label="Copy to clipboard" data-copy-element-id="class-stdout">Copy</button>
 </span>
@@ -199,7 +199,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 9.2.1</a> at Jan 20, 2026, 8:58:12 PM</p>
+<a href="https://www.gradle.org">Gradle 9.2.1</a> at Jan 21, 2026, 7:53:31 PM</p>
 </div>
 </div>
 </body>

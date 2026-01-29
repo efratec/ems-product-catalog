@@ -1,0 +1,38 @@
+[source,json,options="nowrap"]
+----
+{
+  "size" : "10",
+  "number" : 0,
+  "totalElements" : 2,
+  "totalPages" : 1,
+  "content" : [ {
+    "id" : "d3f20899-f48a-4368-aa3f-c89dab2ef95e",
+    "addedAt" : "2014-04-14T12:23:34.123Z",
+    "name" : "Notebook X11",
+    "brand" : "Deep Diver",
+    "regularPrice" : 1500.0,
+    "salePrice" : 1000.0,
+    "inStock" : true,
+    "enabled" : true,
+    "category" : {
+      "id" : "99a03223-f78c-473b-a0e4-a51a09e8ea71",
+      "name" : "Notebook"
+    },
+    "description" : "A Gamer Notebook"
+  }, {
+    "id" : "8b2e953b-1c07-4371-95f3-2eee00d388d8",
+    "addedAt" : "2012-02-12T12:23:34.123Z",
+    "name" : "Desktop I9000",
+    "brand" : "Deep Diver",
+    "regularPrice" : 3500.0,
+    "salePrice" : 3000.0,
+    "inStock" : false,
+    "enabled" : true,
+    "category" : {
+      "id" : "1aa7c0f9-8be3-4c65-9c2a-77a1449cd736",
+      "name" : "Desktop"
+    },
+    "description" : "A Gamer Desktop"
+  } ]
+}
+----

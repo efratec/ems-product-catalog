@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.algaworks.algashop.product.catalog.contract.base.ProductTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-01-21T22:53:31.584Z" hostname="efratec" time="0.253">
+  <properties/>
+  <testcase name="validate_findProductByIdNotFound()" classname="com.algaworks.algashop.product.catalog.contract.base.ProductTest" time="0.051"/>
+  <testcase name="validate_createProductV1()" classname="com.algaworks.algashop.product.catalog.contract.base.ProductTest" time="0.076"/>
+  <testcase name="validate_createProductV1BadRequest()" classname="com.algaworks.algashop.product.catalog.contract.base.ProductTest" time="0.016"/>
+  <testcase name="validate_findProductByIdV1()" classname="com.algaworks.algashop.product.catalog.contract.base.ProductTest" time="0.013"/>
+  <testcase name="validate_updateProductByIdNotFoundV1()" classname="com.algaworks.algashop.product.catalog.contract.base.ProductTest" time="0.02"/>
+  <testcase name="validate_deleteProductByIdV1()" classname="com.algaworks.algashop.product.catalog.contract.base.ProductTest" time="0.013"/>
+  <testcase name="validate_deleteProductByIdNotFoundV1()" classname="com.algaworks.algashop.product.catalog.contract.base.ProductTest" time="0.015"/>
+  <testcase name="validate_updateProductByIdV1()" classname="com.algaworks.algashop.product.catalog.contract.base.ProductTest" time="0.017"/>
+  <testcase name="validate_findProductsV1()" classname="com.algaworks.algashop.product.catalog.contract.base.ProductTest" time="0.022"/>
+  <system-out><![CDATA[2026-01-21T19:53:31.274-03:00  INFO 423790 --- [product-catalog] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.algaworks.algashop.product.catalog.contract.base.ProductTest]: ProductTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-01-21T19:53:31.284-03:00  INFO 423790 --- [product-catalog] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.algaworks.algashop.product.catalog.ProductCatalogApplication for test class com.algaworks.algashop.product.catalog.contract.base.ProductTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.9)
+
+2026-01-21T19:53:31.314-03:00  INFO 423790 --- [product-catalog] [    Test worker] c.a.a.p.c.contract.base.ProductTest      : Starting ProductTest using Java 21.0.7 with PID 423790 (started by efraim in /home/efraim/Desenvolvimento/GIT/Especialista - Microserviços/Algaworks/algashop-meta/microservices/product-catalog)
+2026-01-21T19:53:31.314-03:00  INFO 423790 --- [product-catalog] [    Test worker] c.a.a.p.c.contract.base.ProductTest      : No active profile set, falling back to 1 default profile: "default"
+2026-01-21T19:53:31.576-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:31.576-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:31.576-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-01-21T19:53:31.582-03:00  INFO 423790 --- [product-catalog] [    Test worker] c.a.a.p.c.contract.base.ProductTest      : Started ProductTest in 0.294 seconds (process running for 4.489)
+2026-01-21T19:53:31.599-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:31.600-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:31.600-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-01-21T19:53:31.638-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:31.638-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:31.638-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-01-21T19:53:31.715-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:31.715-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:31.715-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-01-21T19:53:31.732-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:31.732-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:31.732-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-01-21T19:53:31.746-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:31.747-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:31.748-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-01-21T19:53:31.767-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:31.767-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:31.768-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-01-21T19:53:31.782-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:31.783-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:31.783-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-01-21T19:53:31.799-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:31.799-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:31.800-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-01-21T19:53:31.817-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-21T19:53:31.818-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-21T19:53:31.818-03:00  INFO 423790 --- [product-catalog] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

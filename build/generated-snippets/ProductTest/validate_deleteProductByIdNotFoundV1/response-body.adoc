@@ -1,0 +1,4 @@
+[source,json,options="nowrap"]
+----
+{"type":"/errors/not-found","title":"Not found","status":404,"instance":"/api/v1/products/7a6f3c9b-2d8e-4f1a-b5e2-9c3d7f8a1b2e"}
+----
