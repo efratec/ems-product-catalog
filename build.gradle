@@ -57,6 +57,7 @@ dependencies {
 	asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 	testImplementation 'io.rest-assured:rest-assured'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 /**
