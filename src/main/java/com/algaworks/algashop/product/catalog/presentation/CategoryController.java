@@ -3,12 +3,12 @@ package com.algaworks.algashop.product.catalog.presentation;
 import com.algaworks.algashop.product.catalog.application.PageModel;
 import com.algaworks.algashop.product.catalog.application.category.management.CategoryManagementApplicationService;
 import com.algaworks.algashop.product.catalog.application.category.query.CategoryDetailOutput;
+import com.algaworks.algashop.product.catalog.application.category.query.CategoryFilter;
 import com.algaworks.algashop.product.catalog.application.category.query.CategoryInput;
 import com.algaworks.algashop.product.catalog.application.category.query.CategoryQueryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -30,7 +30,7 @@ public class CategoryController {
 
     @PutMapping("/{categoryId}")
     public CategoryDetailOutput update(@RequestBody @Valid CategoryInput input, @PathVariable UUID categoryId) {
-        categoryManagementApplicationService.update(input, categoryId);
+        categoryManagementApplicationService.update(categoryId, input);
         return categoryQueryService.findById(categoryId);
     }
 
@@ -46,9 +46,8 @@ public class CategoryController {
     }
 
     @GetMapping
-    public PageModel<CategoryDetailOutput> filter(@RequestParam(name = "page", required = false) Integer page,
-                                                  @RequestParam(name = "size", required = false) Integer size) {
-        return categoryQueryService.filter(page, size);
+    public PageModel<CategoryDetailOutput> filter(CategoryFilter categoryFilter) {
+        return categoryQueryService.filter(categoryFilter);
     }
 
 }

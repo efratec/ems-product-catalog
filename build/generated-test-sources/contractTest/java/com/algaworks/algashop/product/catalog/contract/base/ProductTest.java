@@ -1,17 +1,14 @@
 package com.algaworks.algashop.product.catalog.contract.base;
 
-import com.algaworks.algashop.product.catalog.contract.base.ProductBase;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import io.restassured.module.mockmvc.specification.MockMvcRequestSpecification;
 import io.restassured.response.ResponseOptions;
+import org.junit.jupiter.api.Test;
 
-import static org.springframework.cloud.contract.verifier.assertion.SpringCloudContractAssertions.assertThat;
-import static org.springframework.cloud.contract.verifier.util.ContractVerifierUtil.*;
 import static com.toomuchcoding.jsonassert.JsonAssertion.assertThatJson;
-import static io.restassured.module.mockmvc.RestAssuredMockMvc.*;
+import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
+import static org.springframework.cloud.contract.verifier.assertion.SpringCloudContractAssertions.assertThat;
 
 @SuppressWarnings("rawtypes")
 public class ProductTest extends ProductBase {

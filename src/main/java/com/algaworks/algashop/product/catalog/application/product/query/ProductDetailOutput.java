@@ -1,5 +1,6 @@
 package com.algaworks.algashop.product.catalog.application.product.query;
 
+import com.algaworks.algashop.product.catalog.application.category.query.CategoryMinimalOutput;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,5 +26,11 @@ public class ProductDetailOutput {
     private Boolean enabled;
     private CategoryMinimalOutput category;
     private String description;
+
+    private String slug;
+    private Boolean hasDiscount;
+
+    private Integer quantityInStock;
+    private Integer discountPercentageRounded;
 
 }

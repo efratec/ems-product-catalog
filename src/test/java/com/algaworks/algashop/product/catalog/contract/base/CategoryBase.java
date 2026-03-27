@@ -12,7 +12,7 @@ import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -51,7 +51,7 @@ public class CategoryBase {
 
         RestAssuredMockMvc.enableLoggingOfRequestAndResponseIfValidationFails();
 
-        Mockito.when(categoryQueryService.filter(Mockito.anyInt(), Mockito.anyInt()))
+        Mockito.when(categoryQueryService.filter(Mockito.any()))
                 .thenAnswer(answer -> {
                     Integer page = answer.getArgument(0);
                     Integer size = answer.getArgument(1);
@@ -83,7 +83,7 @@ public class CategoryBase {
 
         Mockito.doThrow(new ResourceNotFoundException())
                 .when(categoryManagementService)
-                .update(any(CategoryInput.class), eq(invalidUpdateCategoryId));
+                .update(eq(invalidUpdateCategoryId), any(CategoryInput.class));
 
         Mockito.doThrow(new ResourceNotFoundException())
                 .when(categoryManagementService)
