@@ -23,15 +23,5 @@ public class PageModel<T> {
     @Builder.Default
     private List<T> content = new ArrayList<>();
 
-    public static <T> PageModel<T> of(Page<T> page) {
-        return PageModel.<T>builder()
-                .content(page.getContent())
-                .number(page.getNumber())
-                .size(page.getSize())
-                .totalPages(page.getTotalPages())
-                .totalElements(page.getTotalElements())
-                .build();
-    }
-
 }
 

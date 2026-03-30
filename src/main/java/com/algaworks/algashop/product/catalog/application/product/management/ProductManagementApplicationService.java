@@ -1,6 +1,5 @@
 package com.algaworks.algashop.product.catalog.application.product.management;
 
-import com.algaworks.algashop.product.catalog.application.ResourceNotFoundException;
 import com.algaworks.algashop.product.catalog.domain.model.category.Category;
 import com.algaworks.algashop.product.catalog.domain.model.category.CategoryNotFoundException;
 import com.algaworks.algashop.product.catalog.domain.model.category.CategoryRepository;
@@ -35,15 +34,15 @@ public class ProductManagementApplicationService {
                 .regularPrice(input.getRegularPrice())
                 .salePrice(input.getSalePrice())
                 .enabled(input.getEnabled())
+                .category(category)
                 .build();
 
     }
 
     public void update(UUID productId, ProductInput input) {
-        var product = findProduct(productId);
-        var category = findCategory(input.getCategoryId());
+        Product product = findProduct(productId);
         updateProduct(product, input);
-        productRepository.save(product);
+        product.changePrice(input.getRegularPrice(), input.getSalePrice());
     }
 
     public void disable(UUID productId) {
@@ -62,8 +61,6 @@ public class ProductManagementApplicationService {
         product.setName(input.getName());
         product.setBrand(input.getBrand());
         product.setDescription(input.getDescription());
-        product.setRegularPrice(input.getRegularPrice());
-        product.setSalePrice(input.getSalePrice());
         product.setEnabled(input.getEnabled());
     }
 
@@ -72,7 +69,7 @@ public class ProductManagementApplicationService {
     }
 
     private Category findCategory(@NotNull UUID categoryId) {
-        return categoryRepository.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException(categoryId));
+        return categoryRepository.findById(categoryId).orElseThrow(()-> new CategoryNotFoundException(categoryId));
     }
 
 }

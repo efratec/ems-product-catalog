@@ -1,7 +1,8 @@
 package com.algaworks.algashop.product.catalog.application.category.management;
 
-import com.algaworks.algashop.product.catalog.application.ResourceNotFoundException;
+import com.algaworks.algashop.product.catalog.application.category.event.CategoryUpdatedEvent;
 import com.algaworks.algashop.product.catalog.application.category.query.CategoryInput;
+import com.algaworks.algashop.product.catalog.application.ApplicationMessagePublisher;
 import com.algaworks.algashop.product.catalog.domain.model.category.Category;
 import com.algaworks.algashop.product.catalog.domain.model.category.CategoryNotFoundException;
 import com.algaworks.algashop.product.catalog.domain.model.category.CategoryRepository;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CategoryManagementApplicationService {
 
+    private final ApplicationMessagePublisher applicationMessagePublisher;
     private final CategoryRepository categoryRepository;
 
     public UUID create(CategoryInput input) {
@@ -23,11 +25,17 @@ public class CategoryManagementApplicationService {
     }
 
     public void update(UUID categoryId, CategoryInput input) {
-        Category category = categoryRepository.findById(categoryId)
+        var category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new CategoryNotFoundException(categoryId));
         category.setName(input.getName());
         category.setEnabled(input.getEnabled());
         categoryRepository.save(category);
+
+        applicationMessagePublisher.send( CategoryUpdatedEvent.builder()
+                .categoryId(category.getId())
+                .name(category.getName())
+                .enabled(category.getEnabled())
+                .build());
     }
 
     public void disable(UUID categoryId) {
@@ -35,6 +43,12 @@ public class CategoryManagementApplicationService {
                 .orElseThrow(() -> new CategoryNotFoundException(categoryId));
         category.setEnabled(false);
         categoryRepository.save(category);
+
+        applicationMessagePublisher.send( CategoryUpdatedEvent.builder()
+                .categoryId(category.getId())
+                .name(category.getName())
+                .enabled(category.getEnabled())
+                .build());
     }
 
 }

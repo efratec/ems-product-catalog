@@ -6,12 +6,11 @@ import com.algaworks.algashop.product.catalog.domain.model.category.Category;
 import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.annotation.*;
+import org.springframework.data.domain.AbstractAggregateRoot;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
-import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.TextScore;
 
 import java.math.BigDecimal;
@@ -22,15 +21,15 @@ import java.util.UUID;
 
 @Document(collection = "products")
 @Getter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @NoArgsConstructor
 @CompoundIndex(name = "idx_product_by_category_enabled_salesPrice",
-        def = "{'categoryId': 1, 'salesPrice': 1}",
+        def = "{'category.id': 1, 'salesPrice': 1}",
         partialFilter = "{'enabled': true}")
 @CompoundIndex(name = "idx_product_by_category_enabled_addedAt",
-        def = "{'categoryId': 1, 'addedAt': 1}",
+        def = "{'category.id': 1, 'addedAt': 1}",
         partialFilter = "{'enabled': true}")
-public class Product {
+public class Product extends AbstractAggregateRoot<Product> {
 
     @Id
     @EqualsAndHashCode.Include
@@ -69,9 +68,9 @@ public class Product {
     @LastModifiedBy
     private UUID lastModifiedByUserId;
 
-    @DocumentReference
-    @Field(name = "categoryId")
-    private Category category;
+    private ProductCategory category;
+
+    private UUID categoryId;
 
     private Integer discountPercentageRounded;
 
@@ -90,6 +89,8 @@ public class Product {
         this.setRegularPrice(regularPrice);
         this.setSalePrice(salePrice);
         this.setCategory(category);
+
+        super.registerEvent(ProductAddedEvent.builder().productId(this.id).build());
     }
 
     public void setName(String name) {
@@ -104,6 +105,34 @@ public class Product {
             throw new IllegalArgumentException();
         }
         this.brand = brand;
+    }
+
+    public void changePrice(BigDecimal regularPrice, BigDecimal salePrice) {
+        Objects.requireNonNull(regularPrice);
+        Objects.requireNonNull(salePrice);
+
+        BigDecimal oldRegularPrice = this.regularPrice;
+        BigDecimal oldSalePrice = this.salePrice;
+
+        boolean wasOnSale = getHasDiscount();
+
+        if (regularPrice.compareTo(salePrice) < 0) {
+            throw new DomainException("Sale price cannot be greater than regular price");
+        }
+
+        setRegularPrice(regularPrice);
+        setSalePrice(salePrice);
+
+        if (pricesDidNotChange(oldRegularPrice, oldSalePrice)) {
+            return;
+        }
+
+        registerPriceChangedEvent(oldRegularPrice, oldSalePrice);
+
+        if (isNewlyOnSale(wasOnSale)) {
+            registerProductPlacedOnSaleEvent();
+        }
+
     }
 
     public void setRegularPrice(BigDecimal regularPrice) {
@@ -136,14 +165,21 @@ public class Product {
         this.calculateDiscountPercentage();
     }
 
-    public void setEnabled(Boolean enabled) {
-        Objects.requireNonNull(enabled);
+    public void setEnabled(boolean enabled) {
+        boolean wasEnabled = this.enabled;
         this.enabled = enabled;
+
+        if (wasEnabled && !this.getEnabled()) {
+            registerDelistedEvent();
+        } else if (!wasEnabled && this.getEnabled()) {
+            registerListedEvent();
+        }
     }
 
     public void setCategory(Category category) {
         Objects.requireNonNull(category);
-        this.category = category;
+        this.categoryId = category.getId();
+        this.category = ProductCategory.of(category);
     }
 
     public void disable() {
@@ -186,6 +222,48 @@ public class Product {
                 .multiply(BigDecimal.valueOf(100))
                 .setScale(0, RoundingMode.HALF_UP)
                 .intValue();
+    }
+
+    private boolean pricesDidNotChange(BigDecimal oldRegularPrice, BigDecimal oldSalePrice) {
+        return Objects.equals(this.regularPrice, oldRegularPrice)
+                && Objects.equals(this.salePrice, oldSalePrice);
+    }
+
+    private boolean isNewlyOnSale(boolean wasOnSale) {
+        return getHasDiscount() && !wasOnSale;
+    }
+
+    private void registerPriceChangedEvent(BigDecimal oldRegularPrice, BigDecimal oldSalePrice) {
+        super.registerEvent(
+                ProductPriceChangedEvent.builder()
+                        .productId(this.id)
+                        .newSalePrice(this.salePrice)
+                        .newRegularPrice(this.regularPrice)
+                        .oldRegularPrice(oldRegularPrice)
+                        .oldSalePrice(oldSalePrice)
+                        .build()
+        );
+    }
+
+    private void registerProductPlacedOnSaleEvent() {
+        super.registerEvent(ProductPlacedOnSaleEvent.builder()
+                .productId(this.id)
+                .regularPrice(this.regularPrice)
+                .salePrice(this.salePrice)
+                .build()
+        );
+    }
+
+    private void registerDelistedEvent() {
+        super.registerEvent(ProductDelistedEvent.builder()
+                .productId(getId())
+                .build());
+    }
+
+    private void registerListedEvent() {
+        super.registerEvent(ProductListedEvent.builder()
+                .productId(getId())
+                .build());
     }
 
 }
