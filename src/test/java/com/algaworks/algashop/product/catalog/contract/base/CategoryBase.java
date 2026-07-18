@@ -5,6 +5,7 @@ import com.algaworks.algashop.product.catalog.application.ResourceNotFoundExcept
 import com.algaworks.algashop.product.catalog.application.category.CategoryOutputTestFixture;
 import com.algaworks.algashop.product.catalog.application.category.management.CategoryManagementApplicationService;
 import com.algaworks.algashop.product.catalog.application.category.query.CategoryDetailOutput;
+import com.algaworks.algashop.product.catalog.application.category.query.CategoryFilter;
 import com.algaworks.algashop.product.catalog.application.category.query.CategoryInput;
 import com.algaworks.algashop.product.catalog.application.category.query.CategoryQueryService;
 import com.algaworks.algashop.product.catalog.presentation.CategoryController;
@@ -52,20 +53,19 @@ public class CategoryBase {
         RestAssuredMockMvc.enableLoggingOfRequestAndResponseIfValidationFails();
 
         Mockito.when(categoryQueryService.filter(Mockito.any()))
-                .thenAnswer(answer -> {
-                    Integer page = answer.getArgument(0);
-                    Integer size = answer.getArgument(1);
-
+                .then((answer)-> {
+                    CategoryFilter filter = answer.getArgument(0);
                     return PageModel.<CategoryDetailOutput>builder()
-                            .number(page)
-                            .size(size)
+                            .number(0)
+                            .size(filter.getSize())
                             .totalPages(1)
                             .totalElements(2)
-                            .content(List.of(
-                                    CategoryOutputTestFixture.aCategory().build(),
-                                    CategoryOutputTestFixture.aDisabledCategory().build()
-                            ))
-                            .build();
+                            .content(
+                                    List.of(
+                                            CategoryOutputTestFixture.aCategory().build(),
+                                            CategoryOutputTestFixture.aDisabledCategory().build()
+                                    )
+                            ).build();
                 });
 
 

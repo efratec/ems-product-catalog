@@ -6,7 +6,9 @@ import com.algaworks.algashop.product.catalog.application.product.management.Pro
 import com.algaworks.algashop.product.catalog.application.product.management.ProductManagementApplicationService;
 import com.algaworks.algashop.product.catalog.application.product.query.ProductDetailOutput;
 import com.algaworks.algashop.product.catalog.application.product.query.ProductDetailOutputTestFixture;
+import com.algaworks.algashop.product.catalog.application.product.query.ProductFilter;
 import com.algaworks.algashop.product.catalog.application.product.query.ProductQueryService;
+import com.algaworks.algashop.product.catalog.domain.model.product.ProductNotFoundException;
 import com.algaworks.algashop.product.catalog.presentation.ProductController;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,7 +40,6 @@ public class ProductBase {
     private static final UUID validProductId = UUID.fromString("fffe6ec2-7103-48b3-8e4f-3b58e43fb75a");
     private static final UUID invalidProductId = UUID.fromString("21651a12-b126-4213-ac21-19f66ff4642e");
     private static final UUID createdProductId = UUID.fromString("f7c6843f-465c-476d-9a9b-4783bde4dc5e");
-    private static final UUID updatedProductId = UUID.fromString("a3927f81-5d33-4b0e-b2e4-3c1a7bba8d5f");
     private static final UUID updatedNotFoundProductId = UUID.fromString("c7e42a19-8b54-4c92-9d2a-1f8ef83a37e6");
     private static final UUID deletedNotFoundProductId = UUID.fromString("7a6f3c9b-2d8e-4f1a-b5e2-9c3d7f8a1b2e");
 
@@ -50,7 +51,6 @@ public class ProductBase {
 
     @MockitoBean
     private ProductManagementApplicationService productManagementApplicationService;
-
 
     @BeforeEach
     void setUp(RestDocumentationContextProvider documentationContextProvider) {
@@ -64,11 +64,11 @@ public class ProductBase {
 
         RestAssuredMockMvc.enableLoggingOfRequestAndResponseIfValidationFails();
 
-        mockValidOrderFindById();
+        mockValidProductFindById();
         mockFilterProducts();
         mockCreateProduct();
         mockInvalidProductFindById();
-        mockUpdateProduct();
+        mockValidProductUpdate();
         mockUpdateNotFoundProduct();
         mockDeletedProduct();
         mockDeletedNotFoundProduct();
@@ -76,26 +76,27 @@ public class ProductBase {
 
     private void mockInvalidProductFindById() {
         when(productQueryService.findById(invalidProductId))
-                .thenThrow(new ResourceNotFoundException());
+                .thenThrow(new ProductNotFoundException(invalidProductId));
     }
 
     private void mockCreateProduct() {
-        when(productManagementApplicationService.create(any(ProductInput.class)))
-                .thenReturn(createdProductId);
+        var productDetailOutput = ProductDetailOutputTestFixture.aProduct().id(createdProductId).inStock(false).build();
+        Mockito.when(productManagementApplicationService.create(Mockito.any(ProductInput.class)))
+                .thenReturn(productDetailOutput);
 
-        when(productQueryService.findById(createdProductId))
-                .thenReturn(ProductDetailOutputTestFixture.aProduct().inStock(false).build());
+        Mockito.when(productQueryService.findById(createdProductId))
+                .thenReturn(productDetailOutput);
     }
 
+
     private void mockFilterProducts() {
-        when(productQueryService.filter(
-                Mockito.any()))
-                .then((answer) -> {
-                    Integer size = answer.getArgument(0);
+        Mockito.when(productQueryService.filter(Mockito.any()))
+                .then((answer)-> {
+                    ProductFilter filter = answer.getArgument(0);
 
                     return PageModel.<ProductDetailOutput>builder()
                             .number(0)
-                            .size(size)
+                            .size(filter.getSize())
                             .totalPages(1)
                             .totalElements(2)
                             .content(
@@ -107,15 +108,14 @@ public class ProductBase {
                 });
     }
 
-    private void mockValidOrderFindById() {
+    private void mockValidProductFindById() {
         when(productQueryService.findById(validProductId))
                 .thenReturn(ProductDetailOutputTestFixture.aProduct().id(validProductId).build());
     }
 
-    private void mockUpdateProduct() {
-        Mockito.doNothing().when(productManagementApplicationService).update(any(UUID.class), any(ProductInput.class));
-        when(productQueryService.findById(updatedProductId))
-                .thenReturn(ProductDetailOutputTestFixture.aProduct().build());
+    private void mockValidProductUpdate() {
+        Mockito.when(productManagementApplicationService.update(Mockito.any(UUID.class), Mockito.any(ProductInput.class)))
+                .thenReturn(ProductDetailOutputTestFixture.aProduct().id(validProductId).build());
     }
 
     private void mockUpdateNotFoundProduct() {
@@ -133,5 +133,6 @@ public class ProductBase {
                 .when(productManagementApplicationService)
                 .disable(eq(deletedNotFoundProductId));
     }
+
 
 }

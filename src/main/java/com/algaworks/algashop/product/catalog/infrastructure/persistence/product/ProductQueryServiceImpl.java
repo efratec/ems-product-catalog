@@ -12,6 +12,7 @@ import com.algaworks.algashop.product.catalog.domain.model.product.ProductNotFou
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -40,6 +41,7 @@ public class ProductQueryServiceImpl implements ProductQueryService {
     private final Mapper mapper;
 
     @Override
+    @Cacheable(cacheNames = "algashop:products:v1", key = "#productId")
     public ProductDetailOutput findById(UUID productId) {
         var product = productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException(productId));
         return mapper.convert(product, ProductDetailOutput.class);

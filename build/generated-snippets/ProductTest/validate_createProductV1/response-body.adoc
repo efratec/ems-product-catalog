@@ -1,4 +1,4 @@
 [source,json,options="nowrap"]
 ----
-{"id":"b9ac4408-dbb5-472f-bc34-05c0758e977a","addedAt":"2026-01-21T19:53:31.639662158-03:00","name":"Notebook X11","brand":"Deep Diver","regularPrice":1500.00,"salePrice":1000.00,"inStock":false,"enabled":true,"category":{"id":"22249915-479d-47c5-b581-5d217211673e","name":"Notebook"},"description":"A Gamer Notebook"}
+{"id":"702e5d78-7c79-4f88-aeb1-ffb605813ff5","addedAt":"2026-04-11T14:34:15.660444848-03:00","name":"Notebook X11","brand":"Deep Diver","regularPrice":1500.00,"salePrice":1000.00,"inStock":false,"enabled":true,"category":{"id":"06940d7c-24fa-40c3-b202-32b3a090417f","name":"Notebook","enabled":null,"slug":"notebook"},"description":"A Gamer Notebook","slug":null,"hasDiscount":null,"quantityInStock":null,"discountPercentageRounded":null}
 ----

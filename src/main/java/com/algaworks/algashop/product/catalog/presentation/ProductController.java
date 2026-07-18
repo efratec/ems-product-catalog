@@ -27,19 +27,16 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ProductDetailOutput create(@RequestBody @Valid ProductInput input) {
-        UUID productId;
         try {
-            productId = productManagementApplicationService.create(input);
+            return productManagementApplicationService.create(input);
         } catch (CategoryNotFoundException e) {
             throw new UnprocessableContentException(e.getMessage(), e);
         }
-        return productQueryService.findById(productId);
     }
 
     @PutMapping("/{productId}")
     public ProductDetailOutput update(@RequestBody @Valid ProductInput input, @PathVariable UUID productId) {
-        productManagementApplicationService.update(productId, input);
-        return productQueryService.findById(productId);
+        return productManagementApplicationService.update(productId, input);
     }
 
     @DeleteMapping("/{productId}")
@@ -68,6 +65,18 @@ public class ProductController {
     @GetMapping
     public PageModel<ProductSummaryOutput> filter(ProductFilter productFilter) {
         return productQueryService.filter(productFilter);
+    }
+
+    @PostMapping("/{productId}/restock")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void restock(@PathVariable UUID productId, @RequestBody @Valid ProductQuantityModel productQuantityModel) {
+        productManagementApplicationService.restock(productId, productQuantityModel.getQuantity());
+    }
+
+    @PostMapping("/{productId}/withdraw")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void withdraw(@PathVariable UUID productId, @RequestBody @Valid ProductQuantityModel productQuantityModel) {
+        productManagementApplicationService.withdraw(productId, productQuantityModel.getQuantity());
     }
 
 }

@@ -51,6 +51,8 @@ dependencies {
 	implementation 'org.modelmapper:modelmapper:3.2.6'
 	implementation 'com.fasterxml.uuid:java-uuid-generator:5.1.1'
 	implementation 'org.apache.commons:commons-lang3:3.20.0'
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testCompileOnly 'org.projectlombok:lombok'
@@ -60,6 +62,25 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
 	testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-verifier'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+	testImplementation 'org.testcontainers:testcontainers-junit-jupiter'
+	testImplementation 'org.testcontainers:testcontainers-mongodb'
+	testImplementation 'org.springframework.boot:spring-boot-starter-cache-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-data-redis-test'
+
+	constraints {
+		testImplementation('io.rest-assured:rest-assured:6.0.0') {
+			version {
+				strictly '6.0.0'
+			}
+		}
+		testImplementation('io.rest-assured:spring-mock-mvc:6.0.0') {
+			version {
+				strictly '6.0.0'
+			}
+		}
+	}
+
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	mockitoAgent 'org.mockito:mockito-core'
 }

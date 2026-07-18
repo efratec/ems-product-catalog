@@ -1,14 +1,21 @@
 package com.algaworks.algashop.product.catalog.application.product.management;
 
+import com.algaworks.algashop.product.catalog.application.product.query.ProductDetailOutput;
+import com.algaworks.algashop.product.catalog.application.utility.Mapper;
 import com.algaworks.algashop.product.catalog.domain.model.category.Category;
 import com.algaworks.algashop.product.catalog.domain.model.category.CategoryNotFoundException;
 import com.algaworks.algashop.product.catalog.domain.model.category.CategoryRepository;
 import com.algaworks.algashop.product.catalog.domain.model.category.ProductRepository;
 import com.algaworks.algashop.product.catalog.domain.model.product.Product;
 import com.algaworks.algashop.product.catalog.domain.model.product.ProductNotFoundException;
+import com.algaworks.algashop.product.catalog.domain.model.product.StockMovementRepository;
+import com.algaworks.algashop.product.catalog.domain.model.product.StockService;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -18,15 +25,70 @@ public class ProductManagementApplicationService {
 
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
+    private final StockMovementRepository stockMovementRepository;
+    private final StockService stockService;
+    private final Mapper mapper;
 
-    public UUID create(ProductInput input) {
+    @CachePut(cacheNames = "algashop:products:v1", key = "#result.id", condition = "#input.enabled == true")
+    public ProductDetailOutput create(ProductInput input) {
         var product = mapToProduct(input);
         productRepository.save(product);
-        return product.getId();
+        return mapper.convert(product, ProductDetailOutput.class);
+    }
+
+    @CachePut(cacheNames = "algashop:products:v1", key = "#result.id",
+            condition = "#input.enabled == true")
+    @CacheEvict(cacheNames = "algashop:products:v1", key = "#productId",
+            condition = "#input.enabled == false")
+    public ProductDetailOutput update(UUID productId, ProductInput input) {
+        var product = findProduct(productId);
+        var category = findCategory(input.getCategoryId());
+
+        updateProduct(product, input);
+        product.setCategory(category);
+
+        productRepository.save(product);
+
+        return mapper.convert(product, ProductDetailOutput.class);
+    }
+
+    @CacheEvict(cacheNames = "algashop:products:v1", key = "#productId")
+    public void disable(UUID productId) {
+        var product = findProduct(productId);
+        product.disable();
+        productRepository.save(product);
+    }
+
+    public void enable(UUID productId) {
+        var product = findProduct(productId);
+        product.enable();
+        productRepository.save(product);
+    }
+
+    @Transactional
+    public void restock(UUID productId, int quantity) {
+        var product = findProduct(productId);
+        var stockMovement = stockService.restock(product, quantity);
+        stockMovementRepository.save(stockMovement);
+    }
+
+    @Transactional
+    public void withdraw(UUID productId, int quantity) {
+        var product = findProduct(productId);
+        var stockMovement = stockService.withdraw(product, quantity);
+        stockMovementRepository.save(stockMovement);
+    }
+
+    private void updateProduct(Product product, ProductInput input) {
+        product.setName(input.getName());
+        product.setBrand(input.getBrand());
+        product.setDescription(input.getDescription());
+        product.setEnabled(input.getEnabled());
+        product.changePrice(input.getRegularPrice(), input.getSalePrice());
     }
 
     private Product mapToProduct(ProductInput input) {
-        Category category = findCategory(input.getCategoryId());
+        var category = findCategory(input.getCategoryId());
         return Product.builder()
                 .name(input.getName())
                 .brand(input.getBrand())
@@ -36,32 +98,6 @@ public class ProductManagementApplicationService {
                 .enabled(input.getEnabled())
                 .category(category)
                 .build();
-
-    }
-
-    public void update(UUID productId, ProductInput input) {
-        Product product = findProduct(productId);
-        updateProduct(product, input);
-        product.changePrice(input.getRegularPrice(), input.getSalePrice());
-    }
-
-    public void disable(UUID productId) {
-        Product product = findProduct(productId);
-        product.disable();
-        productRepository.save(product);
-    }
-
-    public void enable(UUID productId) {
-        Product product = findProduct(productId);
-        product.enable();
-        productRepository.save(product);
-    }
-
-    private void updateProduct(Product product, ProductInput input) {
-        product.setName(input.getName());
-        product.setBrand(input.getBrand());
-        product.setDescription(input.getDescription());
-        product.setEnabled(input.getEnabled());
     }
 
     private Product findProduct(UUID productId) {
@@ -69,7 +105,7 @@ public class ProductManagementApplicationService {
     }
 
     private Category findCategory(@NotNull UUID categoryId) {
-        return categoryRepository.findById(categoryId).orElseThrow(()-> new CategoryNotFoundException(categoryId));
+        return categoryRepository.findById(categoryId).orElseThrow(()-> CategoryNotFoundException.byID(categoryId));
     }
 
 }

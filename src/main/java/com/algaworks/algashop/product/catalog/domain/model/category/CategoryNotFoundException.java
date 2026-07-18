@@ -6,8 +6,12 @@ import java.util.UUID;
 
 public class CategoryNotFoundException extends DomainEntityNotFoundException {
 
-    public CategoryNotFoundException(UUID categoryId) {
+    private CategoryNotFoundException(UUID categoryId) {
         super(String.format("Category with id %s was not found", categoryId));
+    }
+
+    public static CategoryNotFoundException byID(UUID categoryId) {
+        return new CategoryNotFoundException(categoryId);
     }
 
 }

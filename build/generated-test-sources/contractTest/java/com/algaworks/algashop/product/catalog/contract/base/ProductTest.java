@@ -1,14 +1,17 @@
 package com.algaworks.algashop.product.catalog.contract.base;
 
+import com.algaworks.algashop.product.catalog.contract.base.ProductBase;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import io.restassured.module.mockmvc.specification.MockMvcRequestSpecification;
 import io.restassured.response.ResponseOptions;
-import org.junit.jupiter.api.Test;
 
-import static com.toomuchcoding.jsonassert.JsonAssertion.assertThatJson;
-import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.springframework.cloud.contract.verifier.assertion.SpringCloudContractAssertions.assertThat;
+import static org.springframework.cloud.contract.verifier.util.ContractVerifierUtil.*;
+import static com.toomuchcoding.jsonassert.JsonAssertion.assertThatJson;
+import static io.restassured.module.mockmvc.RestAssuredMockMvc.*;
 
 @SuppressWarnings("rawtypes")
 public class ProductTest extends ProductBase {
@@ -163,7 +166,7 @@ public class ProductTest extends ProductBase {
 		// given:
 			MockMvcRequestSpecification request = given()
 					.header("Content-Type", "application/json")
-					.body("{\"size\":\"10\",\"number\":0,\"totalElements\":2,\"totalPages\":1,\"content\":[{\"id\":\"d3f20899-f48a-4368-aa3f-c89dab2ef95e\",\"addedAt\":\"2014-04-14T12:23:34.123Z\",\"name\":\"Notebook X11\",\"brand\":\"Deep Diver\",\"regularPrice\":1500.00,\"salePrice\":1000.00,\"inStock\":true,\"enabled\":true,\"category\":{\"id\":\"99a03223-f78c-473b-a0e4-a51a09e8ea71\",\"name\":\"Notebook\"},\"description\":\"A Gamer Notebook\"},{\"id\":\"8b2e953b-1c07-4371-95f3-2eee00d388d8\",\"addedAt\":\"2012-02-12T12:23:34.123Z\",\"name\":\"Desktop I9000\",\"brand\":\"Deep Diver\",\"regularPrice\":3500.00,\"salePrice\":3000.00,\"inStock\":false,\"enabled\":true,\"category\":{\"id\":\"1aa7c0f9-8be3-4c65-9c2a-77a1449cd736\",\"name\":\"Desktop\"},\"description\":\"A Gamer Desktop\"}]}");
+					.body("{\"size\":\"10\",\"number\":0,\"totalElements\":2,\"totalPages\":1,\"content\":[{\"id\":\"74dbcf05-1c7f-4191-a3be-21fe4dd93a13\",\"addedAt\":\"2013-03-13T12:23:34.123Z\",\"name\":\"Notebook X11\",\"brand\":\"Deep Diver\",\"regularPrice\":1500.00,\"salePrice\":1000.00,\"inStock\":true,\"enabled\":true,\"category\":{\"id\":\"9c1e1185-5a3d-4062-964c-a8aed18d975e\",\"name\":\"Notebook\"},\"description\":\"A Gamer Notebook\"},{\"id\":\"7d9a807b-b164-4028-8e6f-f18cd0b4b5f2\",\"addedAt\":\"2017-07-17T12:23:34.123Z\",\"name\":\"Desktop I9000\",\"brand\":\"Deep Diver\",\"regularPrice\":3500.00,\"salePrice\":3000.00,\"inStock\":false,\"enabled\":true,\"category\":{\"id\":\"8618abce-0a32-4a07-9df1-96427a754467\",\"name\":\"Desktop\"},\"description\":\"A Gamer Desktop\"}]}");
 
 		// when:
 			ResponseOptions response = given().spec(request)
