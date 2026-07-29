@@ -22,6 +22,7 @@ public class ProductDetailOutputTestFixture {
                 .salePrice(new BigDecimal("1000.00"))
                 .inStock(true)
                 .enabled(true)
+                .updatedAt(OffsetDateTime.now())
                 .category(CategoryMinimalOutput.builder()
                         .id(UUID.randomUUID())
                         .name("Notebook")

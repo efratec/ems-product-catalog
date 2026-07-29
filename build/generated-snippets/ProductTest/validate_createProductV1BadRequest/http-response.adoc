@@ -1,8 +1,0 @@
-[source,http,options="nowrap"]
-----
-HTTP/1.1 400 Bad Request
-Content-Type: application/problem+json
-Content-Length: 335
-
-{"detail":"One or more fields are invalid","instance":"/api/v1/products","status":400,"title":"Invalid fields","type":"/errors/invalid-fields","fields":{"salePrice":"must not be null","regularPrice":"must not be null","name":"must not be blank","brand":"must not be blank","categoryId":"must not be null","enabled":"must not be null"}}
-----

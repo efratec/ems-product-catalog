@@ -1,8 +1,0 @@
-[source,http,options="nowrap"]
-----
-HTTP/1.1 200 OK
-Content-Type: application/json
-Content-Length: 437
-
-{"id":"16406994-42df-408a-9c91-4644187ce3c0","addedAt":"2026-04-11T14:34:15.875004746-03:00","name":"Notebook X11","brand":"Deep Diver","regularPrice":1500.00,"salePrice":1000.00,"inStock":true,"enabled":true,"category":{"id":"538cfcea-b954-4e93-89e8-93b27d0b1c77","name":"Notebook","enabled":null,"slug":"notebook"},"description":"A Gamer Notebook","slug":null,"hasDiscount":null,"quantityInStock":null,"discountPercentageRounded":null}
-----

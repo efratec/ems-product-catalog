@@ -1,8 +1,0 @@
-[source,http,options="nowrap"]
-----
-HTTP/1.1 404 Not Found
-Content-Type: application/problem+json
-Content-Length: 206
-
-{"detail":"Product with id 21651a12-b126-4213-ac21-19f66ff4642e was not found","instance":"/api/v1/products/21651a12-b126-4213-ac21-19f66ff4642e","status":404,"title":"Not found","type":"/errors/not-found"}
-----

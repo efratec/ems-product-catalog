@@ -2,6 +2,7 @@ package com.algaworks.algashop.product.catalog.application.category;
 
 import com.algaworks.algashop.product.catalog.application.category.query.CategoryDetailOutput;
 
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 public class CategoryOutputTestFixture {
@@ -13,6 +14,7 @@ public class CategoryOutputTestFixture {
         return CategoryDetailOutput.builder()
                 .id(UUID.randomUUID())
                 .name("Electronics")
+                .updatedAt(OffsetDateTime.now())
                 .enabled(true);
     }
 
