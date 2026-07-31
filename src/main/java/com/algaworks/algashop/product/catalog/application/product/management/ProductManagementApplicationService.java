@@ -5,7 +5,7 @@ import com.algaworks.algashop.product.catalog.application.utility.Mapper;
 import com.algaworks.algashop.product.catalog.domain.model.category.Category;
 import com.algaworks.algashop.product.catalog.domain.model.category.CategoryNotFoundException;
 import com.algaworks.algashop.product.catalog.domain.model.category.CategoryRepository;
-import com.algaworks.algashop.product.catalog.domain.model.category.ProductRepository;
+import com.algaworks.algashop.product.catalog.domain.model.product.ProductRepository;
 import com.algaworks.algashop.product.catalog.domain.model.product.Product;
 import com.algaworks.algashop.product.catalog.domain.model.product.ProductNotFoundException;
 import com.algaworks.algashop.product.catalog.domain.model.product.StockMovementRepository;

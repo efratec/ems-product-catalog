@@ -40,4 +40,6 @@ public class ProductSummaryOutput {
         return Slugfier.slugify(this.getName());
     }
 
+    private ImageOutput mainImage;
+
 }

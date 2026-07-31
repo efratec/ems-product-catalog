@@ -1,7 +1,6 @@
 package com.algaworks.algashop.product.catalog.domain.model.product;
 
 import com.algaworks.algashop.product.catalog.TestcontainerMongoDBConfig;
-import com.algaworks.algashop.product.catalog.domain.model.category.ProductRepository;
 import com.algaworks.algashop.product.catalog.infrastructure.persistence.MongoConfig;
 import com.algaworks.algashop.product.catalog.infrastructure.persistence.dataload.DataLoadProperties;
 import com.algaworks.algashop.product.catalog.infrastructure.persistence.dataload.DataLoader;

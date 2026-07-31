@@ -9,7 +9,18 @@ spring:
       port: 6379
       password: algashop
       database: 0
-      timeout: 600
+      timeout: 20
+  cloud:
+    aws:
+      region:
+        static: us-east-1
+      endpoint: http://algashop-localstack:4566
+      credentials:
+        access-key: LSIAQAAAAAAVNCBMPNSG
+        secret-key: test
+      s3:
+        enabled: true
+        path-style-access-enabled: true
 
 logging:
   level:
@@ -22,3 +33,8 @@ algashop:
   data-load:
     enabled: true
     auto-delete: true
+  mapping:
+    image-storage-url: http://algashop-localstack:4566/algashop-product-image
+  storage:
+    s3:
+      bucket-name: algashop-product-image

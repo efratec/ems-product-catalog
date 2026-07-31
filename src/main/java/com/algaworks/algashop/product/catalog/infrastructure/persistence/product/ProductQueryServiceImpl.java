@@ -6,7 +6,7 @@ import com.algaworks.algashop.product.catalog.application.product.query.ProductF
 import com.algaworks.algashop.product.catalog.application.product.query.ProductQueryService;
 import com.algaworks.algashop.product.catalog.application.product.query.ProductSummaryOutput;
 import com.algaworks.algashop.product.catalog.application.utility.Mapper;
-import com.algaworks.algashop.product.catalog.domain.model.category.ProductRepository;
+import com.algaworks.algashop.product.catalog.domain.model.product.ProductRepository;
 import com.algaworks.algashop.product.catalog.domain.model.product.Product;
 import com.algaworks.algashop.product.catalog.domain.model.product.ProductNotFoundException;
 import lombok.RequiredArgsConstructor;
