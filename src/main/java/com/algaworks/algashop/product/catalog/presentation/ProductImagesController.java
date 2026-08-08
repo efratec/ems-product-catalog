@@ -4,6 +4,8 @@ import com.algaworks.algashop.product.catalog.application.product.management.Ima
 import com.algaworks.algashop.product.catalog.application.product.management.ProductImageManagementApplicationService;
 import com.algaworks.algashop.product.catalog.application.product.query.ImageOutput;
 import com.algaworks.algashop.product.catalog.application.product.query.ProductImageQueryService;
+import com.algaworks.algashop.product.catalog.infrastructure.security.SecurityAnnotations.CanReadProducts;
+import com.algaworks.algashop.product.catalog.infrastructure.security.SecurityAnnotations.CanWriteProductsStock;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,7 @@ public class ProductImagesController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @CanWriteProductsStock
     public ImageOutput create(@PathVariable UUID productId,
                               @RequestBody @Valid ImageInput input) {
         return managementService.create(productId, input);
@@ -30,22 +33,26 @@ public class ProductImagesController {
 
     @DeleteMapping("{imageId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CanWriteProductsStock
     public void delete(@PathVariable UUID productId, @PathVariable UUID imageId) {
         managementService.delete(productId, imageId);
     }
 
     @PutMapping("{imageId}/primary")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CanWriteProductsStock
     public void primary(@PathVariable UUID productId, @PathVariable UUID imageId) {
         managementService.primary(productId, imageId);
     }
 
     @GetMapping
+    @CanReadProducts
     public List<ImageOutput> getAll(@PathVariable UUID productId) {
         return queryService.getAllImages(productId);
     }
 
     @GetMapping("{imageId}")
+    @CanReadProducts
     public ImageOutput getOne(@PathVariable UUID productId, @PathVariable UUID imageId) {
         return queryService.getImage(productId, imageId);
     }

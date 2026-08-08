@@ -9,6 +9,7 @@ import com.algaworks.algashop.product.catalog.application.product.query.ProductF
 import com.algaworks.algashop.product.catalog.application.product.query.ProductQueryService;
 import com.algaworks.algashop.product.catalog.application.product.query.ProductSummaryOutput;
 import com.algaworks.algashop.product.catalog.domain.model.category.CategoryNotFoundException;
+import com.algaworks.algashop.product.catalog.infrastructure.security.SecurityAnnotations;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.CacheControl;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
 import java.util.UUID;
+
+import static com.algaworks.algashop.product.catalog.infrastructure.security.SecurityAnnotations.*;
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -29,6 +32,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @CanWriteProducts
     public ProductDetailOutput create(@RequestBody @Valid ProductInput input) {
         try {
             return productManagementApplicationService.create(input);
@@ -38,17 +42,20 @@ public class ProductController {
     }
 
     @PutMapping("/{productId}")
+    @CanWriteProducts
     public ProductDetailOutput update(@RequestBody @Valid ProductInput input, @PathVariable UUID productId) {
         return productManagementApplicationService.update(productId, input);
     }
 
     @DeleteMapping("/{productId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CanWriteProducts
     public void delete(@PathVariable UUID productId) {
         productManagementApplicationService.disable(productId);
     }
 
     @GetMapping("/{productId}")
+    @CanReadProducts
     public ResponseEntity<ProductDetailOutput> findById(@PathVariable UUID productId) {
         ProductDetailOutput product = productQueryService.findById(productId);
         return ResponseEntity.ok()
@@ -60,29 +67,34 @@ public class ProductController {
 
     @DeleteMapping("/{productId}/enable")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CanWriteProducts
     public void disable(@PathVariable UUID productId) {
         productManagementApplicationService.disable(productId);
     }
 
     @PutMapping("/{productId}/enable")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CanWriteProducts
     public void enable(@PathVariable UUID productId) {
         productManagementApplicationService.enable(productId);
     }
 
     @GetMapping
+    @CanReadProducts
     public PageModel<ProductSummaryOutput> filter(ProductFilter productFilter) {
         return productQueryService.filter(productFilter);
     }
 
     @PostMapping("/{productId}/restock")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CanWriteProductsStock
     public void restock(@PathVariable UUID productId, @RequestBody @Valid ProductQuantityModel productQuantityModel) {
         productManagementApplicationService.restock(productId, productQuantityModel.getQuantity());
     }
 
     @PostMapping("/{productId}/withdraw")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CanWriteProductsWithdraw
     public void withdraw(@PathVariable UUID productId, @RequestBody @Valid ProductQuantityModel productQuantityModel) {
         productManagementApplicationService.withdraw(productId, productQuantityModel.getQuantity());
     }

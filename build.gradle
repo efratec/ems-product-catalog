@@ -56,6 +56,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'commons-io:commons-io:2.22.0'
+	implementation 'org.springframework.boot:spring-boot-starter-security-oauth2-resource-server'
 
 	implementation platform("io.awspring.cloud:spring-cloud-aws-dependencies:${springCloudAwsVersion}")
 	implementation 'io.awspring.cloud:spring-cloud-aws-starter-s3'
@@ -75,6 +76,7 @@ dependencies {
 	testImplementation 'org.testcontainers:testcontainers-mongodb'
 	testImplementation 'org.springframework.boot:spring-boot-starter-cache-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-data-redis-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-security-oauth2-resource-server-test'
 
 	constraints {
 		testImplementation('io.rest-assured:rest-assured:6.0.0') {
@@ -162,15 +164,15 @@ bootJar {
 	archiveFileName = 'product-catalog.jar'
 }
 
-//tasks.register('dockerBuild', Exec) {
-//	description = 'Builds a multi-platform Docker image using Buildx'
-//	group = 'build'
-//	dependsOn('bootJar')
-//	workingDir project.rootDir
-//	commandLine 'docker', 'buildx', 'build', '--platform', 'linux/arm64/v8,linux/amd64',
-//			'--tag', 'algashop/product-catalog:dev', '.'
-//}
-
+tasks.register('dockerBuild', Exec) {
+	description = 'Builds a multi-platform Docker image using Buildx'
+	group = 'build'
+	dependsOn('bootJar')
+	workingDir project.rootDir
+	commandLine 'docker', 'buildx', 'build', '--platform', 'linux/arm64/v8,linux/amd64',
+			'--tag', 'algashop/product-catalog:dev', '.'
+}
+/*
 tasks.register('dockerBuild', Exec) {
 	description = 'Builds a multi-platform Docker image using Buildx'
 	group = 'build'
@@ -180,4 +182,4 @@ tasks.register('dockerBuild', Exec) {
 			'--load',
 			'--tag', 'algashop/product-catalog:dev',
 			'.'
-}
+}*/
